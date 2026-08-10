@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link rel="stylesheet" href="index.css">
+</head>
+
+<body>
+    <div class="container">
+        <header id="header">
+            <div id="left-side">
+                <h1 >Weather Dashboard</h1>
+            </div>
+            
+                <button id="theme">🌙</button>
+            
+
+        </header>
+        <section id="searchSection">
+            <input type="text" id="search" placeholder="Search...">
+            <button id="searchBtn">Search</button>
+
+        </section>
+        <p id="errorMessage"></p>
+        <section id="weatherCard">
+            <h2>Palakkad</h2>
+            <p>☀️</p>
+            <p class="temperature">29°C</p>
+            <p class="state">Partly Cloudy</p>
+            <p class="feels">Feels like 32°C</p>
+            <div class="drop">
+                <div class="humidity">
+                <p>Humidity </p>
+                <p class="gap">72%</p>
+                
+            </div>
+            <div class="wind">
+                    <p>Wind </p>    
+                    <p class="gap">3.8 m/s</p>
+                </div>
+            </div>
+            <button id="favBtn">Add to Favorites</button>
+        </section>
+        <section id="forecastSection">
+            <div class="forecast-card">
+                <p class="text">Monday</p>
+                <p class="forecastIcon">☀️</p>
+                <p class="forecastTemperature">30°C</p>
+            </div>
+            <div class="forecast-card">
+                <p class="text">Tuesday</p>
+                <p class="forecastIcon">🌤️ </p>
+                <p class="forecastTemperature">31°C</p>
+            </div>
+            <div class="forecast-card">
+                <p class="text">Wednesday</p>
+                <p class="forecastIcon">🌧️</p>
+                <p class="forecastTemperature">29°C</p>
+            </div>
+            <div class="forecast-card">
+                <p class="text">Thursday</p>
+                <p class="forecastIcon"> ☁️ </p>
+                <p class="forecastTemperature">30°C</p>
+            </div>
+            <div class="forecast-card">
+                <p class="text">Friday</p>
+                <p class="forecastIcon">🌧️ </p>
+                <p class="forecastTemperature">28°C</p>
+            </div>
+
+        </section>
+        <section id="favoriteSection">
+            <h2>Favorites</h2>
+        </section>
+    </div>
+    <div id="errorPopup"></div>
+    <script src="index.js"></script>
+</body>
+
+</html>

@@ -1,4 +1,5 @@
 const API_KEY = "76b51dc015315e87195d85cc5369d01b"
+
 const search = document.getElementById("search");
 const searchBtn = document.getElementById("searchBtn");
 // const container = document.getElementsByClassName("container")
@@ -68,10 +69,21 @@ function showError(message) {
     }, 3000);
 }
 
+let debounceTimer;
+
+search.addEventListener("input", function () {
+
+    clearTimeout(debounceTimer);
+
+    debounceTimer = setTimeout(() => {
+        searchWeather();
+    }, 500);
+
+});
 
 async function searchWeather() {
+  
   const value = search.value.trim();
-
 if (!value) {
     showError("Please enter a city");
     return;

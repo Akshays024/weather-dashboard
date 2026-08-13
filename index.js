@@ -16,27 +16,28 @@ const favoriteSection = document.getElementById("favoriteSection")
 const errorPopup = document.getElementById("errorPopup");
 async function getWeather(city) {
   try {
-    const response = await fetch(`https://api.openweathermap.org/data/2.5/weather?q=${city}&appid=${API_KEY}&units=metric`)
+    const response = await fetch(
+      `https://api.openweathermap.org/data/2.5/weather?q=${encodeURIComponent(city)}&appid=${API_KEY}&units=metric`
+    );
 
     if (!response.ok) {
-      throw new Error("fetch failed")
+      const errorData = await response.json();
+      throw new Error(errorData.message || "Weather request failed");
     }
+
     const data = await response.json();
-    const forecastResponse = await fetch(`https://api.openweathermap.org/data/2.5/forecast?q=${city}&appid=${API_KEY}&units=metric`)
-    console.log("STATUS:", forecastResponse.status);
-    const forecastData = await forecastResponse.json()
-    // console.log(forecastData)
-    // // console.log(forecastData.list[0]).
-    // console.log(forecastData.list)
-    // console.log(data)
 
-    // console.log(`${data.name}\n${data.main.temp}\n${data.main.feels_like}\n${data.weather[0].description}\n${data.main.humidity}\n${data.wind.speed}`)
-    //   if(item.name===city){
+    const forecastResponse = await fetch(
+      `https://api.openweathermap.org/data/2.5/forecast?q=${encodeURIComponent(city)}&appid=${API_KEY}&units=metric`
+    );
 
+    if (!forecastResponse.ok) {
+      const errorData = await forecastResponse.json();
+      throw new Error(errorData.message || "Forecast request failed");
+    }
 
-    // let result = data.cities.find((item) => {
-    //   return item.name.toLowerCase() == city
-    // })
+    const forecastData = await forecastResponse.json();
+
     return {
       city: data.name,
       temp: data.main.temp,
@@ -46,9 +47,10 @@ async function getWeather(city) {
       windSpeed: data.wind.speed,
       forecast: forecastData.list
     };
-  } catch (error) {
 
-    console.log(error)
+  } catch (error) {
+    console.error("Weather Error:", error);
+    return null;
   }
 }
 
@@ -106,48 +108,55 @@ const searchResult = await getWeather(value);
 
   });
 
+const dailyForecast = dates.slice(1, 6).map(date => {
 
+    const dayForecasts = searchResult.forecast.filter(item =>
+        item.dt_txt.startsWith(date)
+    );
 
-  const dailyForecast = dates.slice(1, 6).map(date => {
+    return dayForecasts.find(item =>
+        item.dt_txt.includes("12:00:00")
+    ) || dayForecasts[0];
 
-    return searchResult.forecast.find(item => {
-      return item.dt_txt.startsWith(date) && item.dt_txt.includes("12:00:00")
-    });
-
-  });
+}).filter(Boolean);
   console.log(dailyForecast)
   console.log("DATES:", dates);
   console.log("DAILY:", dailyForecast);
 
+forecastCard.forEach((card, index) => {
 
-  forecastCard.forEach((card, index) => {
     const forecast = dailyForecast[index];
+
     if (!forecast) {
-      return;
+        card.style.display = "none";
+        return;
     }
+
+    card.style.display = "block";
+
     const day = card.querySelector(".text");
     const icon = card.querySelector(".forecastIcon");
-    const forecastTemparature = card.querySelector(".forecastTemperature");
+    const forecastTemperature =
+        card.querySelector(".forecastTemperature");
 
+    const forecastDate = new Date(forecast.dt_txt);
 
-    const forecastDates = new Date(forecast.dt_txt);
-    const dayName = forecastDates.toLocaleDateString("en-US", {
-      weekday: "long"
+    const dayName = forecastDate.toLocaleDateString("en-US", {
+        weekday: "long"
+    });
 
-    })
     day.textContent = dayName;
 
     icon.innerHTML = `
-            <img
-                src="https://openweathermap.org/img/wn/${forecast.weather[0].icon}@2x.png"
-                alt="${forecast.weather[0].description}"
-            >
-        `;
+        <img
+            src="https://openweathermap.org/img/wn/${forecast.weather[0].icon}@2x.png"
+            alt="${forecast.weather[0].description}"
+        >
+    `;
 
-
-    forecastTemparature.textContent =
-      `${Math.round(forecast.main.temp)}°C`;
-  })
+    forecastTemperature.textContent =
+        `${Math.round(forecast.main.temp)}°C`;
+});
   console.log(dates)
 
   cityName.textContent = `${searchResult.city}`

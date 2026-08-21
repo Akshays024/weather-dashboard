@@ -1,38 +1,31 @@
 :root {
-    --bg-color: #F4F7FB;
-    --card-color: #FFFFFF;
-    --primary-color: #2563EB;
-    --primary-hover: #1D4ED8;
-    --text-color: #0F172A;
-    --secondary-text: #64748B;
-    --border-color: #E2E8F0;
-    --favorite-color: #F59E0B;
-    --error-color: #DC2626;
+    --bg-color: #f5f7fa;
+    --card-color: #ffffff;
+    --primary-color: #2563eb;
+    --primary-hover: #1d4ed8;
+    --text-color: #1e293b;
+    --secondary-text: #64748b;
+    --border-color: #e2e8f0;
+    --favorite-color: #f59e0b;
+    --error-color: #dc2626;
+}
 
-}
 .dark-theme {
-    --bg-color: #0F172A;
-    --card-color: #1E293B;
-    --primary-color: #60A5FA;
-    --primary-hover: #3B82F6;
-    --text-color: #F8FAFC;
-    --secondary-text: #CBD5E1;
-    --border-color: #334155;
-    --favorite-color: #F59E0B;
-    --error-color: #F87171;
+    --bg-color: #111827;
+    --card-color: #1f2937;
+    --primary-color: #60a5fa;
+    --primary-hover: #3b82f6;
+    --text-color: #f1f5f9;
+    --secondary-text: #94a3b8;
+    --border-color: #374151;
+    --favorite-color: #f59e0b;
+    --error-color: #f87171;
 }
-#errorPopup {
-    position: fixed;
-    top: 20px;
-    right: 20px;
-    padding: 14px 20px;
-    background-color: var(--error-color);
-    color: white;
-    border-radius: 8px;
-    font-weight: bold;
-    display: none;
-    z-index: 1000;
-}
+
+
+/* =========================
+   RESET
+========================= */
 
 * {
     margin: 0;
@@ -42,237 +35,695 @@
 }
 
 body {
+    min-height: 100vh;
     background-color: var(--bg-color);
     color: var(--text-color);
+    transition: background-color 0.2s ease;
 }
 
 .container {
-
+    width: 90%;
     max-width: 1000px;
-    margin: 0 auto;
-    padding: 20px;
-
+    margin: auto;
+    padding: 25px 0 45px;
 }
 
-.main-text {
-    color: var(--text-color);
-}
 
-#searchSection {
-    display: flex;
-    gap: 20px;
-
-}
-
-#searchBtn {
-    padding: 5px 20px;
-    border-radius: 5px;
-    border: 1px solid var(--primary-color);
-    cursor: pointer;
-    font-weight: bold;
-    background-color: var(--primary-color);
-    color: white;
-}
-
-#search {
-    border-radius: 10px;
-    padding: 10px;
-    border: 1px solid var(--border-color);
-    background-color: var(--card-color);
-    color: var(--text-color);
-    flex: 1;
-}
-
-#search:focus {
-    outline-color: var(--primary-color);
-    border: 1px solid var(--primary-hover)
-}
+/* =========================
+   HEADER
+========================= */
 
 #header {
     display: flex;
     justify-content: space-between;
     align-items: center;
-    margin-bottom: 10px;
+    margin-bottom: 22px;
 }
 
-#theme {
+#header h1 {
+    font-size: 28px;
+    color: var(--text-color);
+}
 
-    padding: 10px;
-    border: none;
-    border-radius: 10px;
+#header h1::before {
+    content: "☁ ";
+    color: var(--primary-color);
+}
+
+
+/* Theme */
+
+#theme {
+    width: 42px;
+    height: 42px;
+
+    border: 1px solid var(--border-color);
+    border-radius: 8px;
+
+    background-color: var(--card-color);
+    color: var(--text-color);
+
     cursor: pointer;
-    transition: 1s;
-    background-color: var(--bg-color);
-    font-size: 30px;
+    font-size: 20px;
+
+    transition: 0.2s ease;
 }
 
 #theme:hover {
-    border: 2px solid var(--primary-hover);
-
+    border-color: var(--primary-color);
+    transform: scale(1.04);
 }
 
-#weatherCard {
-    padding: 10px;
-    margin: 3px;
-    border: 2px solid var(--border-color);
-    /* text-align: center; */
+
+/* =========================
+   SEARCH
+========================= */
+
+#searchSection {
     display: flex;
-    flex-direction: column;
-    align-items: center;
-    gap: 20px;
-    border-radius: 20px;
-    margin-top: 10px;
+    gap: 10px;
+}
+
+#search {
+    flex: 1;
+
+    height: 46px;
+
+    padding: 0 15px;
+
+    border: 1px solid var(--border-color);
+    border-radius: 7px;
+
+    outline: none;
+
     background-color: var(--card-color);
     color: var(--text-color);
 
-
+    font-size: 15px;
 }
 
-#weatherCard button {
-    width: 100%;
-    max-width: 200px;
-    background-color: var(--favorite-color);
-    border-radius: 40px;
-    height: 30px;
-    border: 2px solid var(--primary-hover);
+#search::placeholder {
+    color: var(--secondary-text);
+}
+
+#search:focus {
+    border-color: var(--primary-color);
+}
+
+
+/* Search button */
+
+#searchBtn {
+    height: 46px;
+
+    padding: 0 22px;
+
+    border: none;
+    border-radius: 7px;
+
+    background-color: var(--primary-color);
+    color: white;
+
     cursor: pointer;
 
+    font-weight: bold;
+
+    transition: 0.2s ease;
 }
+
+#searchBtn::before {
+    content: "🔍 ";
+}
+
+#searchBtn:hover {
+    background-color: var(--primary-hover);
+}
+
+
+/* =========================
+   ERROR
+========================= */
+
+#errorMessage {
+    min-height: 18px;
+
+    margin-top: 8px;
+
+    color: var(--error-color);
+
+    font-size: 14px;
+
+    font-weight: bold;
+}
+
+#errorPopup {
+    position: fixed;
+
+    top: 20px;
+    right: 20px;
+
+    padding: 12px 18px;
+
+    background-color: var(--error-color);
+    color: white;
+
+    border-radius: 7px;
+
+    font-size: 14px;
+    font-weight: bold;
+
+    display: none;
+
+    z-index: 1000;
+}
+
+
+/* =========================
+   CURRENT WEATHER
+========================= */
+
+#weatherCard {
+    position: relative;
+
+    margin-top: 18px;
+
+    min-height: 350px;
+
+    padding: 30px 20px;
+
+    border: 1px solid var(--border-color);
+    border-radius: 12px;
+
+    background-color: var(--card-color);
+
+    display: flex;
+    flex-direction: column;
+
+    align-items: center;
+    justify-content: center;
+
+    gap: 9px;
+
+    text-align: center;
+
+    box-shadow: 0 3px 12px rgba(15, 23, 42, 0.06);
+}
+
+
+/* Location */
+
+#weatherCard h2 {
+    font-size: 27px;
+
+    text-transform: capitalize;
+}
+
+#weatherCard h2::before {
+    content: "📍 ";
+    font-size: 22px;
+}
+
+
+/* Main weather icon */
+
+#weatherCard > p:first-of-type {
+    font-size: 50px;
+
+    margin: 5px 0;
+}
+
+
+/* Temperature */
+
+.temperature {
+    font-size: 50px;
+
+    font-weight: bold;
+
+    color: var(--primary-color);
+}
+
+
+/* Weather condition */
+
+.state {
+    font-size: 17px;
+
+    color: var(--text-color);
+
+    text-transform: capitalize;
+}
+
+
+/* Feels like */
+
+.feels {
+    color: var(--secondary-text);
+
+    font-size: 14px;
+}
+
+.feels::before {
+    content: "🌡️ ";
+}
+
+
+/* =========================
+   HUMIDITY + WIND
+========================= */
 
 .drop {
     display: flex;
-    gap: 30px;
 
+    gap: 12px;
+
+    margin-top: 12px;
 }
 
-.humidity {
-    padding-left: 10px;
+.humidity,
+.wind {
+    min-width: 140px;
 
+    padding: 12px 20px;
 
-}
+    border: 1px solid var(--border-color);
 
-.gap {
-    margin-top: 10px;
-}
-
-.temperature {
-    font-size: 30px;
-    font-weight: bold;
-    color: var(--primary-color);
-}
-
-#forecastSection {
-    margin-top: 30px;
-    display: grid;
-    grid-template-columns: 1fr;
+    border-radius: 8px;
 
     background-color: var(--bg-color);
-    gap: 15px;
+
+    text-align: center;
+}
+
+.humidity p:first-child,
+.wind p:first-child {
+    color: var(--secondary-text);
+
+    font-size: 13px;
+
+    font-weight: bold;
+}
+
+.humidity p:first-child::before {
+    content: "💧 ";
+}
+
+.wind p:first-child::before {
+    content: "💨 ";
+}
+
+.humidity .gap,
+.wind .gap {
+    margin-top: 5px;
+
+    font-size: 17px;
+
+    font-weight: bold;
+}
+
+
+/* =========================
+   FAVORITE BUTTON
+========================= */
+
+#weatherCard button {
+    width: 190px;
+
+    height: 39px;
+
+    margin-top: 10px;
+
+    border: none;
+
+    border-radius: 7px;
+
+    background-color: var(--favorite-color);
+
+    color: white;
+
+    cursor: pointer;
+
+    font-weight: bold;
+
+    transition: 0.2s ease;
+}
+
+#weatherCard button::before {
+    content: "⭐ ";
+}
+
+#weatherCard button:hover {
+    opacity: 0.9;
+
+    transform: translateY(-1px);
+}
+
+
+/* =========================
+   FORECAST
+========================= */
+
+#forecastSection {
+    margin-top: 32px;
+
+    display: grid;
+
+    grid-template-columns: repeat(5, 1fr);
+
+    gap: 12px;
+}
+
+
+/* Add heading feel before cards */
+
+#forecastSection::before {
+    content: "5-Day Forecast";
+
+    grid-column: 1 / -1;
+
+    font-size: 22px;
+
+    font-weight: bold;
+
+    color: var(--text-color);
+
+    margin-bottom: 2px;
 }
 
 .forecast-card {
+    min-height: 155px;
+
+    padding: 18px 10px;
+
     border: 1px solid var(--border-color);
-    border-radius: 15px;
-    padding: 20px;
-    box-shadow: 0 2px 8px rgba(15, 23, 42, 0.08);
-    text-align: center;
+
+    border-radius: 10px;
+
     background-color: var(--card-color);
-    color: var(--text-color);
+
+    display: flex;
+
+    flex-direction: column;
+
+    align-items: center;
+
+    justify-content: center;
+
+    gap: 8px;
+
+    text-align: center;
+
+    transition: 0.2s ease;
 }
 
-.forecastIcon {
-    font-size: 35px;
-    margin: 10px 0;
-}
+.forecast-card:hover {
+    border-color: var(--primary-color);
 
-.forecastTemperature {
-    font-size: 22px;
-    font-weight: bold;
-    color: var(--primary-color);
-}
-
-@media (min-width: 768px) {
-
-    #forecastSection {
-        grid-template-columns: repeat(5, 1fr);
-    }
-
+    transform: translateY(-2px);
 }
 
 .text {
+    font-size: 14px;
+
     font-weight: bold;
+
+    color: var(--secondary-text);
 }
+
+.forecastIcon {
+    min-height: 52px;
+
+    display: flex;
+
+    align-items: center;
+
+    justify-content: center;
+
+    font-size: 34px;
+}
+
+.forecastIcon img {
+    width: 58px;
+    height: 58px;
+}
+
+.forecastTemperature {
+    font-size: 20px;
+
+    font-weight: bold;
+
+    color: var(--primary-color);
+}
+
+
+/* =========================
+   FAVORITES SECTION
+========================= */
+
 #favoriteSection {
+    margin-top: 35px;
+
     display: grid;
+
     grid-template-columns: repeat(3, 1fr);
-    gap: 16px;
-    margin-top: 30px;
+
+    gap: 12px;
 }
 
 #favoriteSection h2 {
     grid-column: 1 / -1;
-    margin-bottom: 5px;
-    color: var(--text-color);
+
+    font-size: 22px;
+
+    margin-bottom: 2px;
 }
 
+#favoriteSection h2::before {
+    content: "⭐ ";
+    color: var(--favorite-color);
+}
+
+
+/* Favorite cards */
 
 #favoriteSection > div {
-    position: relative;
-    padding: 18px;
-    border-radius: 16px;
-    display: grid;
-    grid-template-columns: 1fr auto;
-    align-items: center;
-    column-gap: 15px;
-    background-color: var(--card-color);
-    color: var(--text-color);
+    min-height: 115px;
+
+    padding: 16px;
+
     border: 1px solid var(--border-color);
+
+    border-radius: 10px;
+
+    background-color: var(--card-color);
+
+    display: grid;
+
+    grid-template-columns: 1fr auto;
+
+    align-items: center;
+
+    column-gap: 12px;
+
+    transition: 0.2s ease;
 }
-#favoriteSection p {
-    margin: 4px 0;
+
+#favoriteSection > div:hover {
+    border-color: var(--primary-color);
 }
+
+
+/* City */
 
 #favoriteSection p:first-of-type {
-    font-size: 20px;
-    font-weight: bold;
-}
-
-#favoriteSection p:nth-of-type(2) {
     font-size: 18px;
+
+    font-weight: bold;
+
+    text-transform: capitalize;
 }
 
-#favoriteSection p:nth-of-type(3) {
+#favoriteSection p:first-of-type::before {
+    content: "📍 ";
     font-size: 14px;
 }
 
+
+/* Temperature */
+
+#favoriteSection p:nth-of-type(2) {
+    margin-top: 4px;
+
+    font-size: 17px;
+
+    font-weight: bold;
+
+    color: var(--primary-color);
+}
+
+
+/* Description */
+
+#favoriteSection p:nth-of-type(3) {
+    margin-top: 3px;
+
+    font-size: 13px;
+
+    color: var(--secondary-text);
+
+    text-transform: capitalize;
+}
+
+
+/* Remove */
+
 #favoriteSection .removeBtn {
     grid-column: 2;
+
     grid-row: 1 / span 3;
 
-    padding: 8px 12px;
-    border: none;
-    border-radius: 8px;
+    padding: 7px 10px;
+
+    border: 1px solid var(--border-color);
+
+    border-radius: 6px;
+
+    background-color: transparent;
+
+    color: var(--error-color);
+
     cursor: pointer;
-}
-@media (max-width: 767px) {
-    #favoriteSection {
-        grid-template-columns: 1fr;
-    }
+
+    font-size: 12px;
+
+    font-weight: bold;
 }
 
-@media (min-width: 768px) and (max-width: 999px) {
+#favoriteSection .removeBtn::before {
+    content: "🗑️ ";
+}
+
+#favoriteSection .removeBtn:hover {
+    background-color: var(--error-color);
+
+    border-color: var(--error-color);
+
+    color: white;
+}
+
+
+/* =========================
+   TABLET
+========================= */
+
+@media (max-width: 900px) {
+
+    #forecastSection {
+        grid-template-columns: repeat(3, 1fr);
+    }
+
     #favoriteSection {
         grid-template-columns: repeat(2, 1fr);
     }
 }
 
-@media (min-width: 1000px) {
+
+/* =========================
+   MOBILE
+========================= */
+
+@media (max-width: 600px) {
+
+    .container {
+        width: 94%;
+
+        padding-top: 20px;
+    }
+
+    #header h1 {
+        font-size: 23px;
+    }
+
+    #searchSection {
+        flex-direction: column;
+    }
+
+    #searchBtn {
+        width: 100%;
+    }
+
+    #weatherCard {
+        padding: 25px 15px;
+    }
+
+    #weatherCard h2 {
+        font-size: 24px;
+    }
+
+    .temperature {
+        font-size: 43px;
+    }
+
+    .drop {
+        width: 100%;
+
+        justify-content: center;
+
+        gap: 10px;
+    }
+
+    .humidity,
+    .wind {
+        min-width: 0;
+
+        flex: 1;
+
+        padding: 12px 8px;
+    }
+
+    #forecastSection {
+        grid-template-columns: repeat(2, 1fr);
+    }
+
     #favoriteSection {
-        grid-template-columns: repeat(3, 1fr);
+        grid-template-columns: 1fr;
     }
 }
-#errorMessage {
-    color: var(--error-color);
-    margin-top: 10px;
-    font-weight: bold;
+
+
+/* =========================
+   SMALL MOBILE
+========================= */
+
+@media (max-width: 400px) {
+
+    #header h1 {
+        font-size: 20px;
+    }
+
+    #theme {
+        width: 38px;
+        height: 38px;
+    }
+
+    .temperature {
+        font-size: 40px;
+    }
+
+    .drop {
+        gap: 6px;
+    }
+
+    .forecast-card {
+        min-height: 140px;
+    }
+
+    #errorPopup {
+        left: 15px;
+        right: 15px;
+
+        top: 15px;
+
+        text-align: center;
+    }
 }
